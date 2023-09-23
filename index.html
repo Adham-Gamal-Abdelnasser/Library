@@ -29,11 +29,14 @@
                 <div class="container">
                     <div class="mb-3">
                         <label for="nameInput" class="form-label">Book Name</label>
-                        <input type="email" class="form-control" id="nameInput" />
+                        <input type="text" class="form-control" id="nameInput" />
+                        <div id="nameRequired" class="bg-danger bg-opacity-50 my-3 py-2 rounded-4 border border-1 border-danger fw-bold d-none">Name Is Required</div>
+                        <div id="nameExist" class="bg-danger bg-opacity-50 my-3 py-2 rounded-4 border border-1 border-danger fw-bold d-none">Name Is already exist</div>
                     </div>
                     <div class="mb-3">
                         <label for="urlInput" class="form-label">Book URL</label>
-                        <input type="email" class="form-control" id="urlInput" placeholder="ex: https://XXX-XXX.com"/>
+                        <input type="text" class="form-control" id="urlInput" placeholder="ex: https://XXX-XXX.com"/>
+                        <div id="urlRequired" class="bg-danger bg-opacity-50 my-3 py-2 rounded-4 border border-1 border-danger fw-bold d-none">URL Is Required</div>
                     </div>
                 </div>
                 <button class="btn btn-success w-50" id="addBtn" onclick="addBook()">Add</button>

@@ -1,5 +1,8 @@
 let nameInput = document.getElementById("nameInput")
 let urlInput = document.getElementById("urlInput")
+let nameRequired = document.getElementById("nameRequired")
+let urlRequired = document.getElementById("urlRequired")
+let nameExist = document.getElementById("nameExist")
 
 let library = []
 
@@ -13,10 +16,26 @@ function addBook() {
     label: nameInput.value,
     url: urlInput.value
   }
-  library.push(bookData)
-  localStorage.setItem("books",JSON.stringify(library))
-  displayBook()
-  clearInputs()
+  if (nameInput.value === "" || urlInput.value === "" || checkNameIsExist()!= 0) {
+    if (nameInput.value === "") {
+      getAlertName()
+    }
+    if (urlInput.value === "") {
+      getAlertUrl()
+    }
+    if (checkNameIsExist()!= 0) {
+      nameExist.classList.replace("d-none","d-block")
+    }
+  }
+  else{
+    checkAlertNameExistence(nameRequired)
+    checkAlertNameExistence(nameExist)
+    checkAlertUrlExistence()
+    library.push(bookData)
+    localStorage.setItem("books",JSON.stringify(library))
+    displayBook()
+    clearInputs()
+  }
 }
 
 function displayBook() {
@@ -42,4 +61,25 @@ function deleteBook(index) {
   library.splice(index,1)
   localStorage.setItem("books",JSON.stringify(library))
   displayBook()
+}
+
+function getAlertName() {
+  nameRequired.classList.replace("d-none","d-block") ;     
+}
+function getAlertUrl() {
+  urlRequired.classList.replace("d-none","d-block") ;     
+}
+function checkAlertNameExistence(nameId) {
+  if (nameId.classList.contains("d-block")) {
+    nameId.classList.replace("d-block","d-none")
+  }
+}
+function checkAlertUrlExistence() {
+  if (urlRequired.classList.contains("d-block")) {
+    urlRequired.classList.replace("d-block","d-none")
+  }
+}
+function checkNameIsExist() {
+  let res = library.filter(ele=>ele.label == nameInput.value)
+  return res.length
 }
